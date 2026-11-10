@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Catálogo Completo | Funeraria San Rafael</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-stone-50 text-stone-800 font-sans min-h-screen flex flex-col justify-between">
+
+  <!-- ENCABEZADO -->
+  <header class="bg-white shadow-sm py-4 px-6 flex justify-between items-center border-b border-rose-100">
+    <div>
+      <h1 class="text-xl font-bold text-rose-950 tracking-wide">Funeraria San Rafael</h1>
+      <p class="text-xs text-stone-500">Catálogo Interactivo de Servicios y Personalizaciones</p>
+    </div>
+    <div class="space-x-4">
+      <a href="index.html" class="text-xs font-semibold text-rose-900 hover:underline">← Inicio</a>
+      <a href="dashboard.html" class="text-xs font-semibold bg-rose-950 text-white px-3 py-1.5 rounded-lg">Panel Admin →</a>
+    </div>
+  </header>
+
+  <!-- CONTENIDO PRINCIPAL -->
+  <main class="max-w-6xl mx-auto py-10 px-4 w-full">
+    
+    <!-- BARRA DE BÚSQUEDA Y FILTROS -->
+    <div class="mb-8 flex flex-col md:flex-row justify-between items-center gap-4">
+      <input type="text" id="buscador" placeholder="Buscar servicio por nombre..." onkeyup="filtrarServicios()" class="w-full md:w-1/3 px-4 py-2 rounded-xl border border-stone-200 focus:outline-none focus:border-rose-900 text-sm">
+      
+      <div class="flex gap-2 flex-wrap">
+        <button onclick="filtrarCategoria('todos')" class="px-4 py-2 bg-rose-950 text-white text-xs font-medium rounded-xl transition">Todos</button>
+        <button onclick="filtrarCategoria('inmediato')" class="px-4 py-2 bg-white border border-stone-200 text-stone-700 text-xs font-medium rounded-xl hover:border-rose-900 transition">Atención Inmediata</button>
+        <button onclick="filtrarCategoria('prevision')" class="px-4 py-2 bg-white border border-stone-200 text-stone-700 text-xs font-medium rounded-xl hover:border-rose-900 transition">Planes de Previsión</button>
+      </div>
+    </div>
+
+    <!-- TARJETAS DE SERVICIOS -->
+    <div id="contenedorServicios" class="grid grid-cols-1 md:grid-cols-3 gap-6 items-stretch">
+      
+      <!-- SERVICIO 1 -->
+      <div class="servicio-card bg-white p-6 rounded-2xl shadow-sm border border-rose-100 flex flex-col justify-between" data-categoria="inmediato" data-nombre="servicio funerario inmediato esencial">
+        <div>
+          <span class="text-xs font-semibold text-rose-800 bg-rose-50 px-3 py-1 rounded-full">Atención Inmediata</span>
+          <h3 class="text-lg font-bold text-rose-950 mt-3 mb-1">Plan Esencial Inmediato</h3>
+          <p class="text-stone-600 text-xs mb-4">Servicio funerario integral con ataúd base, trámites legales y traslado local.</p>
+
+          <!-- OPCIONES EXTRAS -->
+          <div class="border-t border-stone-100 pt-3 mb-4 space-y-2">
+            <p class="text-xs font-bold text-stone-700 mb-2">Personaliza con servicios adicionales:</p>
+            
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="60" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Atención de cafetería</span>
+              <span class="font-semibold text-stone-500">+$60</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="120" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Alquiler de sala de velación</span>
+              <span class="font-semibold text-stone-500">+$120</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="50" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Altar de velación decorado</span>
+              <span class="font-semibold text-stone-500">+$50</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="75" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Homenaje de vida musical</span>
+              <span class="font-semibold text-stone-500">+$75</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="25" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Set de sillas extra (25 unidades)</span>
+              <span class="font-semibold text-stone-500">+$25</span>
+            </label>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-stone-100 flex justify-between items-center">
+          <div>
+            <span class="text-[10px] uppercase text-stone-400 font-semibold block">Total Configurado</span>
+            <span class="precio-total text-xl font-extrabold text-rose-950" data-base="800">$800</span>
+          </div>
+          <button onclick="solicitarServicio(this)" class="text-xs bg-rose-950 hover:bg-rose-900 text-white font-medium px-4 py-2.5 rounded-xl transition">
+            Solicitar WhatsApp
+          </button>
+        </div>
+      </div>
+
+      <!-- SERVICIO 2 -->
+      <div class="servicio-card bg-white p-6 rounded-2xl shadow-sm border border-rose-100 flex flex-col justify-between" data-categoria="prevision" data-nombre="plan de prevision familiar oro">
+        <div>
+          <span class="text-xs font-semibold text-rose-800 bg-rose-50 px-3 py-1 rounded-full">Previsión</span>
+          <h3 class="text-lg font-bold text-rose-950 mt-3 mb-1">Plan Previsión Familiar Oro</h3>
+          <p class="text-stone-600 text-xs mb-4">Cobertura familiar anticipada. Incluye preparación y traslado.</p>
+
+          <!-- OPCIONES EXTRAS -->
+          <div class="border-t border-stone-100 pt-3 mb-4 space-y-2">
+            <p class="text-xs font-bold text-stone-700 mb-2">Personaliza con servicios adicionales:</p>
+            
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="60" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Atención de cafetería</span>
+              <span class="font-semibold text-stone-500">+$60</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="120" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Alquiler de sala de velación</span>
+              <span class="font-semibold text-stone-500">+$120</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="50" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Altar de velación decorado</span>
+              <span class="font-semibold text-stone-500">+$50</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="75" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Homenaje de vida musical</span>
+              <span class="font-semibold text-stone-500">+$75</span>
+            </label>
+
+            <label class="flex items-center justify-between text-xs text-stone-600 cursor-pointer">
+              <span><input type="checkbox" data-precio="25" class="extra-check text-rose-900 rounded mr-2" onchange="actualizarPrecioTarjeta(this)"> Set de sillas extra (25 unidades)</span>
+              <span class="font-semibold text-stone-500">+$25</span>
+            </label>
+          </div>
+        </div>
+<!-- SELECTOR DE PLAZOS DE FINANCIAMIENTO (Solo para Previsión) -->
+<div class="border-t border-stone-100 pt-3 mb-4 bg-rose-50/50 p-3 rounded-xl">
+  <label class="block text-xs font-bold text-rose-950 mb-1">¿Desea financiamiento a plazos?</label>
+  <select class="w-full text-xs p-2 rounded-lg border border-rose-200 bg-white text-stone-700 focus:outline-none focus:border-rose-900" onchange="calcularCuotasPrevision(this)">
+    <option value="0">Pago de contado (Sin interés)</option>
+    <option value="1">1 año (5% interés anual)</option>
+    <option value="2">2 años (10% total - 5% anual)</option>
+    <option value="3">3 años (15% total - 5% anual)</option>
+  </select>
+  <p id="detalleCuota" class="text-[11px] text-rose-900 mt-2 font-medium hidden"></p>
+</div>
+        <div class="pt-4 border-t border-stone-100 flex justify-between items-center">
+          <div>
+            <span class="text-[10px] uppercase text-stone-400 font-semibold block">Total Configurado</span>
+            <span class="precio-total text-xl font-extrabold text-rose-950" data-base="500">$500</span>
+          </div>
+          
+          <button onclick="solicitarServicio(this)" class="text-xs bg-rose-950 hover:bg-rose-900 text-white font-medium px-4 py-2.5 rounded-xl transition">
+            Solicitar WhatsApp
+          </button>
+        </div>
+      </div>
+
+    </div>
+<!-- SERVICIO 3: PREMIUM TODO INCLUIDO -->
+      <div class="servicio-card bg-white p-6 rounded-2xl shadow-sm border border-rose-100 flex flex-col justify-between" data-categoria="inmediato" data-nombre="servicio funerario premium todo incluido">
+        <div>
+          <span class="text-xs font-semibold text-rose-900 bg-rose-100 px-3 py-1 rounded-full">Exclusivo / Premium</span>
+          <h3 class="text-lg font-bold text-rose-950 mt-3 mb-1">Plan Premium Todo Incluido</h3>
+          <p class="text-stone-600 text-xs mb-4">La solución más completa y distinguida. Incluye todos los adicionales sin costo extra y atención personalizada de alta gama.</p>
+
+          <!-- INCLUSIONES -->
+          <div class="border-t border-stone-100 pt-3 mb-4 space-y-2 bg-rose-50/40 p-3 rounded-xl">
+            <p class="text-xs font-bold text-rose-950 mb-1">Incluye sin costo adicional:</p>
+            <ul class="text-[11px] text-stone-600 space-y-1">
+              <li>✓ Atención de cafetería ilimitada</li>
+              <li>✓ Alquiler de sala de velación VIP</li>
+              <li>✓ Altar de velación floral premium</li>
+              <li>✓ Homenaje de vida </li>
+              <li>✓ Set de sillas extra y traslados</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="pt-4 border-t border-stone-100 flex justify-between items-center mt-auto">
+          <div>
+            <span class="text-[10px] uppercase text-stone-400 font-semibold block">Inversión Total</span>
+            <span class="precio-total text-xl font-extrabold text-rose-950" data-base="3000">$3000</span>
+          </div>
+          <button onclick="solicitarServicio(this)" class="text-xs bg-rose-950 hover:bg-rose-900 text-white font-medium px-4 py-2.5 rounded-xl transition">
+            Solicitar WhatsApp
+          </button>
+        </div>
+      </div>
+  </main>
+<!-- SECCIÓN DE CATÁLOGO DE ATAÚDES -->
+  <section class="max-w-6xl mx-auto py-12 px-4 w-full border-t border-rose-100 mt-12">
+    <div class="mb-8 text-center md:text-left">
+      <h2 class="text-2xl font-bold text-rose-950">Galería de Ataúdes Disponibles</h2>
+      <p class="text-xs text-stone-500 mt-1">Conozca nuestra selección de féretros elaborados con altos estándares de calidad y acabados artesanales.</p>
+    </div>
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      
+      <!-- Ataúd 1: Económico -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+        <div>
+          <div class="h-40 bg-stone-100 rounded-xl mb-4 flex items-center justify-center text-stone-400 text-xs font-medium overflow-hidden">
+            <!-- Espacio para la imagen o etiqueta -->
+            <span><img src="ataud.png" alt="Ataúd Estándar"></span>
+          </div>
+          <span class="text-[10px] font-semibold text-stone-600 bg-stone-100 px-2.5 py-0.5 rounded-full">Gama Estándar</span>
+          <h4 class="text-base font-bold text-rose-950 mt-2">Modelo Roble Clásico</h4>
+          <p class="text-stone-600 text-xs mt-2 leading-relaxed">
+            Fabricado en madera sólida de pino reforestado. Cuenta con un diseño sobrio de líneas rectas, asas metálicas fijas de acabado bronceado y un interior tapizado en tela satín color marfil.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 border-t border-stone-100 flex justify-between items-center">
+          <span class="text-sm font-bold text-stone-700">Incluido en Plan Base</span>
+          <span class="text-xs text-rose-900 font-semibold hover:underline cursor-pointer" onclick="alert('Seleccionado: Roble Clásico')">Ver detalles</span>
+        </div>
+      </div>
+
+      <!-- Ataúd 2: Intermedio -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+        <div>
+          <div class="h-40 bg-stone-100 rounded-xl mb-4 flex items-center justify-center text-stone-400 text-xs font-medium overflow-hidden">
+            <span><img src="ataud.png" alt="Ataúd Intermedio"></span>
+          </div>
+          <span class="text-[10px] font-semibold text-rose-800 bg-rose-50 px-2.5 py-0.5 rounded-full">Gama Media</span>
+          <h4 class="text-base font-bold text-rose-950 mt-2">Modelo Caoba Fina</h4>
+          <p class="text-stone-600 text-xs mt-2 leading-relaxed">
+            Construido en madera de caoba seleccionada con pulido de alto brillo. Incorpora molduras laterales trabajadas a mano, herrajes de lujo dorados y capitonado interno en terciopelo suave.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 border-t border-stone-100 flex justify-between items-center">
+          <span class="text-sm font-bold text-rose-950">+$350 de ajuste</span>
+          <span class="text-xs text-rose-900 font-semibold hover:underline cursor-pointer" onclick="alert('Seleccionado: Caoba Fina')">Ver detalles</span>
+        </div>
+      </div>
+
+      <!-- Ataúd 3: Premium -->
+      <div class="bg-white p-5 rounded-2xl shadow-sm border border-stone-200 flex flex-col justify-between">
+        <div>
+          <div class="h-40 bg-stone-100 rounded-xl mb-4 flex items-center justify-center text-stone-400 text-xs font-medium overflow-hidden">
+            <span><img src="ataud.png" alt=""></span>
+          </div>
+          <span class="text-[10px] font-semibold text-rose-950 bg-rose-100 px-2.5 py-0.5 rounded-full">Gama Imperial (Premium)</span>
+          <h4 class="text-base font-bold text-rose-950 mt-2">Modelo Imperial de Lujo</h4>
+          <p class="text-stone-600 text-xs mt-2 leading-relaxed">
+            Ebanistería de máxima categoría en madera de cedro real. Doble tapa con apertura americana, detalles tallados a mano en los zócalos, herrajes de alta gama en baño de oro y colchón anatómico interior.
+          </p>
+        </div>
+        <div class="mt-6 pt-3 border-t border-stone-100 flex justify-between items-center">
+          <span class="text-sm font-bold text-rose-950">Incluido en Plan Premium</span>
+          <span class="text-xs text-rose-900 font-semibold hover:underline cursor-pointer" onclick="alert('Seleccionado: Imperial de Lujo')">Ver detalles</span>
+        </div>
+      </div>
+
+    </div>
+  </section>
+  <!-- PIE DE PÁGINA -->
+  <footer class="bg-stone-100 text-stone-500 py-6 text-center text-xs border-t border-stone-200">
+    &copy; 2026 Funeraria San Rafael. Catálogo interactivo de servicios.
+  </footer>
+
+  <!-- LÓGICA JAVASCRIPT -->
+  <script>
+    // 1. Recalcula el precio total de una tarjeta específica al marcar/desmarcar extras
+    function actualizarPrecioTarjeta(element) {
+      let tarjeta = element.closest('.servicio-card');
+      let elementoPrecio = tarjeta.querySelector('.precio-total');
+      let precioBase = parseInt(elementoPrecio.getAttribute('data-base'));
+      
+      let checkboxes = tarjeta.querySelectorAll('.extra-check:checked');
+      let totalExtras = 0;
+      
+      checkboxes.forEach(chk => {
+        totalExtras += parseInt(chk.getAttribute('data-precio'));
+      });
+
+      let totalFinal = precioBase + totalExtras;
+      elementoPrecio.innerText = "$" + totalFinal;
+    }
+
+    // 2. Filtra por texto en el buscador
+    function filtrarServicios() {
+      let textoBusqueda = document.getElementById('buscador').value.toLowerCase();
+      let tarjetas = document.querySelectorAll('.servicio-card');
+
+      tarjetas.forEach(tarjeta => {
+        let nombre = tarjeta.getAttribute('data-nombre');
+        tarjeta.style.display = nombre.includes(textoBusqueda) ? "flex" : "none";
+      });
+    }
+
+    // 3. Filtra por categorías de botones
+    function filtrarCategoria(categoria) {
+      let tarjetas = document.querySelectorAll('.servicio-card');
+
+      tarjetas.forEach(tarjeta => {
+        let catTarjeta = tarjeta.getAttribute('data-categoria');
+        if (categoria === 'todos' || catTarjeta === categoria) {
+          tarjeta.style.display = "flex";
+        } else {
+          tarjeta.style.display = "none";
+        }
+      });
+    }
+
+    // 4. Envía a WhatsApp la personalización elegida de esa tarjeta en específico
+    function solicitarServicio(button) {
+      let tarjeta = button.closest('.servicio-card');
+      let titulo = tarjeta.querySelector('h3').innerText;
+      let total = tarjeta.querySelector('.precio-total').innerText;
+      
+      let extrasSeleccionados = [];
+      tarjeta.querySelectorAll('.extra-check:checked').forEach(chk => {
+        extrasSeleccionados.push(chk.parentElement.innerText.trim());
+      });
+
+      let mensaje = `Hola, me interesa el servicio: *${titulo}*\n`;
+      if(extrasSeleccionados.length > 0) {
+        mensaje += `\n*Con los siguientes adicionales:*\n- ${extrasSeleccionados.join('\n- ')}\n`;
+      }
+      mensaje += `\n*Total Estimado:* ${total}`;
+
+      let url = `https://wa.me/50300000000?text=${encodeURIComponent(mensaje)}`;
+      window.open(url, '_blank');
+    }
+
+    function calcularCuotasPrevision(selectElement) {
+  let tarjeta = selectElement.closest('.servicio-card');
+  let anos = parseInt(selectElement.value);
+  let elementoPrecio = tarjeta.querySelector('.precio-total');
+  let textoCuota = tarjeta.querySelector('#detalleCuota');
+
+  // Obtenemos el precio base + extras actuales sin el financiamiento previo
+  let precioBase = parseInt(elementoPrecio.getAttribute('data-base'));
+  let checkboxes = tarjeta.querySelectorAll('.extra-check:checked');
+  let totalExtras = 0;
+  checkboxes.forEach(chk => {
+    totalExtras += parseInt(chk.getAttribute('data-precio'));
+  });
+
+  let subtotal = precioBase + totalExtras;
+
+  if (anos === 0) {
+    // Si es de contado, dejamos el precio normal
+    elementoPrecio.innerText = "$" + subtotal;
+    textoCuota.classList.add('hidden');
+  } else {
+    // Cálculo matemático: 5% de interés anual simple por cada año
+    let tasaInteresTotal = 0.05 * anos; 
+    let totalConInteres = subtotal * (1 + tasaInteresTotal);
+    let mesesTotales = anos * 12;
+    let cuotaMensual = totalConInteres / mesesTotales;
+
+    // Actualizamos el total visual en la tarjeta
+    elementoPrecio.innerText = "$" + totalConInteres.toFixed(2);
+    
+    // Mostramos el desglose de la cuota mensual
+    textoCuota.classList.remove('hidden');
+    textoCuota.innerText = `Cuota mensual: $${cuotaMensual.toFixed(2)} al mes por ${mesesTotales} meses (${anos} ${anos === 1 ? 'año' : 'años'})`;
+  }
+}
+  </script>
+
+</body>
+</html>
